@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #efefef;
+  font-family: "Fredoka", sans-serif;
+}
+
+.App {
+  min-height: 100vh;
+  /* background: rgb(2,0,36);background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 18%, rgba(0,212,255,1) 100%); */
+
+  /* background-image: url(); */
+  background: linear-gradient(135deg, #3164c9, #c325eb);
+}
