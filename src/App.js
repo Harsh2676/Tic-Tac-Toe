@@ -136,7 +136,6 @@ const App = () => {
       <Board board={board} onClick={gameOver ? resetBoard : handleBoxClick} />
       <ResetButton text='Restart Game' resetBoard={resetBoard} />
       <ResetButton text='Reset Score' resetBoard={resetGame} />
-      {/* <audio></audio> */}
     </div>
   );
 };
