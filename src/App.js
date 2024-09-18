@@ -3,8 +3,8 @@ import { Board } from "./components/Board";
 import { ResetButton } from "./components/ResetButton";
 import { ScoreBoard } from "./components/ScoreBoard";
 import { toast } from "react-toastify";
-import "./App.css";
 import Title from "./components/Title";
+import "./App.css";
 
 const App = () => {
   const WIN_CONDITIONS = [
@@ -23,6 +23,16 @@ const App = () => {
   const [scores, setScores] = useState({ xScore: 0, oScore: 0 });
   const [gameOver, setGameOver] = useState(false);
 
+  // const Waterdrop = new Audio('../public/Audio/Water-drop.mp3');
+
+  function playsfx () {
+    new Audio('/Audio/Water-drop.mp3').play();
+  }
+
+  function Victorysfx() {
+    new Audio('/Audio/Victory.mp3').play();
+  }
+
   // Fetch scores from localStorage
   useEffect(() => {
     const score = JSON.parse(localStorage.getItem('score'));
@@ -32,7 +42,7 @@ const App = () => {
     }
     console.log(localStorage.getItem('score'));
     console.log(score, "from local storage");
-    toast.success("Welcome to Tic Tac Toe Made By HARSH")
+    toast.success("Welcome to Tic Tac Toe Made By HARSH");
   }, []);
 
   // Save scores to localStorage when they change
@@ -43,9 +53,11 @@ const App = () => {
       console.log(scores, "Set To Localstorage");
       localStorage.setItem('score', JSON.stringify(scores));
     }
+
   }, [scores]);
 
   const handleBoxClick = (boxIdx) => {
+    
     const updatedBoard = board.map((value, idx) => {
       if (idx === boxIdx) {
         return xPlaying ? "X" : "O";
@@ -53,6 +65,8 @@ const App = () => {
         return value;
       }
     });
+
+    playsfx();
 
     setBoard(updatedBoard);
 
@@ -63,6 +77,7 @@ const App = () => {
         let { oScore } = scores;
         oScore += 1;
         setScores({ ...scores, oScore });
+        Victorysfx();
         toast.success("Wow, O Won Game!", {
           position: "top-right",
           autoClose: 5000,
@@ -76,6 +91,7 @@ const App = () => {
         let { xScore } = scores;
         xScore += 1;
         setScores({ ...scores, xScore });
+        Victorysfx();
         toast.success("Wow, X Won Game!", {
           position: "top-right",
           autoClose: 5000,
@@ -120,6 +136,7 @@ const App = () => {
       <Board board={board} onClick={gameOver ? resetBoard : handleBoxClick} />
       <ResetButton text='Restart Game' resetBoard={resetBoard} />
       <ResetButton text='Reset Score' resetBoard={resetGame} />
+      {/* <audio></audio> */}
     </div>
   );
 };
